@@ -1,16 +1,16 @@
 {
-  "name": "RefArchConvBroker",
+  "name": "Elli",
   "version": "0.0.1",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ibm-cloud-architecture/refarch-cognitive-conversation-broker.git"
+    "url": "https://github.com/Fyrd8th"
   },
   "engines": {
     "node": "6.x",
     "npm": "5.x"
   },
-  "author": "Jerome Boyer",
+  "author": "Jerome Boyer, Sade Sirén", 
   "scripts": {
     "ng": "ng",
     "start": "node server/server",

@@ -52,20 +52,20 @@ module.exports = {
        if (response.Error !== undefined) {
          res.status(500).send({'text':response.Error});
        } else {
-           response.text="<p>"+response.output.text[0]+"</p>";
-           /*
-           if (response.context.action !== undefined && response.context.action == "predefinedResponses") {
-             for (var sr in response.context.predefinedResponses) {
-               response.text=response.text+
-               "<br/><a class=\"btn btn-primary\" (click)=\"advisorResponse(\""
-               +response.context.predefinedResponses[sr]
-               +"\")>"
-               +response.context.predefinedResponses[sr]+"</a>"
-               console.log(response.text)
-             }
-           }
-           */
-           if (response.context.action === "click") {
+			response.text="<p>"+response.output.text[0]+"</p>";
+			/*
+			if (response.context.action !== undefined && response.context.action == "predefinedResponses") {
+				for (var sr in response.context.predefinedResponses) {
+				response.text=response.text+
+				"<br/><a class=\"btn btn-primary\" (click)=\"advisorResponse(\""
+				+response.context.predefinedResponses[sr]
+				+"\")>"
+				+response.context.predefinedResponses[sr]+"</a>"
+				console.log(response.text)
+				}
+			}
+			*/
+			if (response.context.action === "click") {
                response.text= response.text+ "<br/><a class=\"btn btn-primary\" href=\""+response.context.url+"\">"+response.context.buttonText+"</a>"
            }
          res.status(200).send(response);
@@ -129,7 +129,9 @@ var processITSupportResponse = function(config,res,response){
         // Here apply orchestration logic
         if (response.context.url != undefined) {
             if (response.context.action === "click") {
-                response.text=response.output.text[0] + "<a class=\"btn btn-primary\" href=\""+response.context.url+"\">Here</a>"
+				//console.log("URL was found: " + response.context.url);
+                response.text= response.output.text[0] + "<a class=\"btn btn-primary\" href=\""+response.context.url+"\">Here</a>"
+				//console.log(response.text);
             }
         } else if (response.context.action === "trigger"
              && response.context.actionName === "supplierOnBoardingProcess") {

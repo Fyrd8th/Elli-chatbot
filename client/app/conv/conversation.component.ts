@@ -52,7 +52,7 @@ export class ConversationComponent implements OnInit, AfterViewChecked {
         this.context=data.context;
         let s:Sentence = new Sentence();
         s.direction="from-watson";
-        s.text=data.output.text[0];
+		s.text=data.output.text[0];
         this.currentDialog.push(s)
       },
       error => {
