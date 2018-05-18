@@ -23,7 +23,4 @@ Main page component to display access to the different demo features.
       this.router.navigate(['conversation/sodb']);
     }
 
-    advisor(){
-      this.router.navigate(['advisor']);
-    }
 }
