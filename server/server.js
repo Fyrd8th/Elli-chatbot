@@ -41,6 +41,6 @@ app.get('*', (req, res) => {
 // start server on the specified port and binding host
 const port = process.env.PORT || config.port;
 app.listen(port, '0.0.0.0', function() {
-  console.log("Conversation Broker Service "+ config.version+" starting on " + port);
+  console.log("Elli "+ config.version+" starting on " + port);
   console.log("  Use your web browser: http://localhost:"+port);
 });
