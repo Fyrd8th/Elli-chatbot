@@ -1,45 +1,16 @@
-# Cognitive Architecture: Conversation Broker
-This project offers a set of simple APIs in front of Watson Conversation to be consumed by your web interface, your mobile app, or micro service or even a business process running on [IBM BPM on Cloud](http://www-03.ibm.com/software/products/en/business-process-manager-cloud). It is implemented as a micro service, using resiliency and light weight implementation, packaging and deployment model.
-
+# Ellibs Chatbot Elli
 This project is part of the **IBM Cognitive Reference Architecture** compute model available at https://github.com/ibm-cloud-architecture/refarch-cognitive.
+
 # Table of Contents
 * [Introduction](#introduction)
-* [Skill set](https://github.com/ibm-cloud-architecture/refarch-cognitive-conversation-broker#expected-knowledge)
-* [Tutorial](doc/tutorial/README.md)
 * [Pre-requisites](https://github.com/ibm-cloud-architecture/refarch-cognitive-conversation-broker#prerequisites)
+* [Build and Deploy](https://github.com/ibm-cloud-architecture/refarch-cognitive-conversation-broker#build-and-deploy)
 * [Design considerations](./doc/design/README.md)
 * [Code explanation](#code-explanation)
-* [Build and Deploy](https://github.com/ibm-cloud-architecture/refarch-cognitive-conversation-broker#build-and-deploy)
 * [Compendium](https://github.com/ibm-cloud-architecture/refarch-cognitive-conversation-broker#compendium)
 
 # Introduction
-This implementation addresses multiple facets for developing a cloud native cognitive app:
-* How to facade Watson Conversation to support service orchestration, persistence, conversations chaining... and any business logic needed to support an integrated hybrid chat bot.
-* How to implement an 'IT Support' chat bot with Watson Conversation, with an exported [workspace](wcs-workspace/ITsupport-workspace.json). This is a common business requirement to use chat bot to address internal staff queries about IT applications or hardware. A second workspace is also delivered to support conversation inside a BPM coach to ask for help in the context of a process ([Supplier on boarding help](wcs-workspace/ITsupport-workspace.json)).
-* A complete set of aspects to support production deployment like logging, monitoring, resiliency, security.
-
-The project includes an [angular js](http://angular.io) web application to illustrate a simple conversation chat user interface which itself uses the broker APIs. The project is designed as a micro service, deployable as a containerized application on [IBM Bluemix](http://www.bluemix.net) [Kubernetes](https://www.ibm.com/blogs/bluemix/2017/03/kubernetes-now-available-ibm-bluemix-container-service/) Cluster. The concept of broker is presented in the [IBM Cognitive Reference Architecture for Conversation](https://www.ibm.com/devops/method/content/architecture/cognitiveArchitecture#engagementDomain), specially illustrated as 'Conversation Logic' in the figure below:
-
-![WCS Reference Architecture](doc/readme/WCS-ra.png)
-
-## Current Version
-The current version is used for IBM internal [training](./doc/tutorial/README.md) and demonstration: it is functional and supports the following features:
-* User interface is done with [Angular js](angular.io) and support a simple  input field to enter questions to Watson and get a chat type of user experience. There are two interface versions: one with tutorial and one without.
-* The supported questions depend on the Intents defined in Watson Conversation. Two proposed Watson Conversation workspaces are available under the folder [wcs-workspace](./wcs-workspace) as JSON files:
-  * one to support the CASE Inc IT support chat bot solution.
-  * one to support the supplier on boarding business process contextual help.
-  * one to advise user for migration to cloud.
-* Support the Backend for Front end pattern with a nodejs/ expressjs application which exposes a HTTP POST /api/conversation end point.
-* Support the integration to BPM on cloud by triggering a business process via SOAP request by getting customer name and product name from the conversation. See explanation [here](doc/integrate-bpm.md)
-* Support persisting the conversation inside a document oriented database like [Cloudand DB on bluemix](https://console.ng.bluemix.net/catalog/services/cloudant-nosql-db). See detail [here](doc/persistence.md)
-
-You may fork this project for your own purpose and develop on top of it. If you want to contribute please submit a pull request on this repository, see [rule of contribution](https://github.com/ibm-cloud-architecture/refarch-cognitive#contribute)
-
-
-# Expected knowledge
-On top of the [common](https://github.com/ibm-cloud-architecture/refarch-cognitive#Expected-skill-set) skill set defined for *cyan compute* the reader needs to get some good understanding of the following concepts:
-* Know how to design a Watson Conversation, if not familiar doing the attached [step by step tutorial](./doc/tutorial/README.md) should help you  developing the Watson Conversation workspace with intent, entities definition and conversation flow needed for the IT support demonstration.
-* The following [article](doc/persistence.md) addresses how to persist the conversation in Cloud based document database like Cloudant or an on-premise database.
+[TBA]
 
 # Prerequisites
 
@@ -49,13 +20,52 @@ On top of the [common](https://github.com/ibm-cloud-architecture/refarch-cogniti
 * Clone current repository, or if you want to work on the code, fork it in your own github repository and then clone your forked repository on your local computer.
 
 ```
-git clone https://github.com/ibm-cloud-architecture/refarch-cognitive-conversation-broker
-cd refarch-cognitive-conversation-broker
+git clone URL
+cd Elli
 npm install
 ```
-* You need to install Angular 2 command line interface [cli.angular.io](http://cli.angular.io) tool ``` sudo  npm install -g @angular/cli``` on Mac for example.
+* You need to install Angular 2 command line interface [cli.angular.io](http://cli.angular.io) tool 
+``` sudo  npm install -g @angular/cli``` on Mac for example.
 * You need to install [nodemon](https://nodemon.io/) with ``` sudo npm install -g nodemo```
 
+# Build and Deploy
+
+## Build
+You can clone the repository, and uses the following commands:
+```
+# Install all the dependencies defined in the package.json
+$ npm install
+# Install angular Command Line Interface for compiling code
+$ sudo npm install -g @angular/cli
+# the previous commands are to prepare the environment
+
+# to compile the angular code
+$ ng build
+# to test the server with mocha
+$ npm test
+```
+
+Execute locally
+```
+# execute with a build of angular code and start the server in monitoring mode,
+# so change to server restarts the server.
+$ npm run dev
+
+# You can also execute the app without compilation and monitoring
+$ npm start
+
+#or use nodemon to run it with the App name Elli
+$ nodemon Elli
+```
+
+## Deploy to Bluemix as Cloud Foundry
+To be able to deploy to bluemix, you need a bluemix account and the command line interface.  
+You can use the ```cf push <bluemix-app-name>```
+You can use also this one click button.
+[![Deploy to Bluemix](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy?repository=https://github.com/ibm-cloud-architecture/refarch-cognitive-conversation-broker)
+
+## Deploy to IBM Cloud Private
+See the detailed [note here](doc/icp/README.md)
 
 
 # Code explanation  
@@ -407,43 +417,6 @@ case:
 
 The body should content at least the {text: message} json object. The context object is optional, it will be added with the Watson Conversation ID reference in the code on the first call to the service.
 
-
-# Build and Deploy
-
-## Build
-You can clone the repository, and uses the following commands:
-```
-# Install all the dependencies defined in the package.json
-$ npm install
-# Install angular Command Line Interface for compiling code
-$ sudo npm install -g @angular/cli
-# the previous commands are to prepare the environment
-
-# to compile the angular code
-$ ng build
-# to test the server with mocha
-$ npm test
-```
-
-Execute locally
-```
-# execute with a build of angular code and start the server in monitoring mode,
-# so change to server restarts the server.
-$ npm run dev
-
-# You can also execute the app without compilation and monitoring
-$ npm start
-```
-
-## Deploy to Bluemix as Cloud Foundry
-To be able to deploy to bluemix, you need a bluemix account and the command line interface.  
-You can use the ```cf push <bluemix-app-name>```
-You can use also this one click button.
-[![Deploy to Bluemix](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy?repository=https://github.com/ibm-cloud-architecture/refarch-cognitive-conversation-broker)
-
-
-## Deploy to IBM Cloud Private
-See the detailed [note here](doc/icp/README.md)
 
 # Compendium
 
