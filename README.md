@@ -1,13 +1,14 @@
 # Ellibs Chatbot Elli
-This project is part of the **IBM Cognitive Reference Architecture** compute model available at https://github.com/ibm-cloud-architecture/refarch-cognitive.
+This project is the start of Elli chatbot for Ellibs
+https://github.com/Fyrd8th/Elli-chatbot.git
 
 # Table of Contents
 * [Introduction](#introduction)
-* [Pre-requisites](https://github.com/ibm-cloud-architecture/refarch-cognitive-conversation-broker#prerequisites)
-* [Build and Deploy](https://github.com/ibm-cloud-architecture/refarch-cognitive-conversation-broker#build-and-deploy)
-* [Design considerations](./doc/design/README.md)
+* [Pre-requisites]
+* [Build and Deploy]
+* [Design considerations]
 * [Code explanation](#code-explanation)
-* [Compendium](https://github.com/ibm-cloud-architecture/refarch-cognitive-conversation-broker#compendium)
+* [Compendium]
 
 # Introduction
 Elli is a chatbot meant for Ellibs customer service.
