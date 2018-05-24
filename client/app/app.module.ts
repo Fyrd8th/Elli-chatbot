@@ -8,7 +8,6 @@ import { AppComponent }         from './app.component';
 import { ConversationComponent} from './conv/conversation.component';
 import { ConversationService }  from './conv/conversation.service';
 
-
 const routes: Routes = [
   { path: '', component: ConversationComponent },
   { path: 'conversation/:type', component: ConversationComponent },

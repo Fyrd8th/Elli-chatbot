@@ -44,6 +44,8 @@ export class ConversationComponent implements OnInit, AfterViewChecked {
 
   // variable used for the input field in html page to get user query
   queryString=""
+  // variable to use for translation
+  translationString=""
 
   callConversationBFF(msg:string) {
     this.context['type']=this.type; // inject the type of caller so the BFF can call different conversation workspace
@@ -67,8 +69,10 @@ export class ConversationComponent implements OnInit, AfterViewChecked {
     obj.direction="to-watson";
     obj.text=this.queryString;
     this.currentDialog.push(obj);
-    this.callConversationBFF(this.queryString);
+	this.translationString = this.convService.translateMessage(queryString);
+    this.callConversationBFF(this.translationString);
     this.queryString="";
+	this.translationString="";
   }
 
   // instead to click on button if user hits enter/return key
