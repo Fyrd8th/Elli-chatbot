@@ -7,7 +7,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppComponent }         from './app.component';
 import { ConversationComponent} from './conv/conversation.component';
 import { ConversationService }  from './conv/conversation.service';
-import { HomeComponent }        from './home.component';
 
 
 const routes: Routes = [
@@ -20,7 +19,6 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
     ConversationComponent,
   ],
   imports: [

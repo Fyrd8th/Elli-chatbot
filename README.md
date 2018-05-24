@@ -10,7 +10,23 @@ This project is part of the **IBM Cognitive Reference Architecture** compute mod
 * [Compendium](https://github.com/ibm-cloud-architecture/refarch-cognitive-conversation-broker#compendium)
 
 # Introduction
-[TBA]
+Elli is a chatbot meant for Ellibs customer service.
+
+## Quick Guide to start
+Make sure you've got installed:
+- Node.js
+
+Also, if you already have these, it will streamline things:
+- Angular CLI 
+
+Then, after copying the project to your directory-of-choise:
+- use terminal to wrtie "npm install" to get all the dependencies stated in the package.json installed (this will be a lot, don't fret)
+- (if you didn't have Angular from elsewhere, then write to terminal "npm install -g @angular/cli")
+
+Running the project:
+npm run dev
+This will both build the Angular app (create the dist folder) and start the server.
+If you want to change something, and run it again, *delete the /dist-folder*
 
 # Prerequisites
 

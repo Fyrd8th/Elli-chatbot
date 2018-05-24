@@ -1,10 +1,10 @@
 <div class="collapse navbar-collapse" id="main-navbar">
   <ul class="nav navbar-nav">
-      <li class=""><a [routerLink]="['/']">Takaisin</a></li>
+      <!-- nothing in the navbar currently -->
   </ul>
 </div>
 <div class='row'>
-  <div class="col-xs-8">
+  <div class="col-xs-10">
      <div class="conversation-container">
         <div #scrollMe  class="scrolling-box">
           <div *ngFor="let p of currentDialog">
@@ -28,15 +28,12 @@
                        type="text"
                        size="60"
                        [(ngModel)]="queryString"
-                       placeholder="Send a message to Support Bot!"
+                       placeholder="Kirjoita Ellille!"
                        name="queryString"
                        autocomplete="off"/>
                 <button class="btn btn-primary" (click)="submit()" type="button">Send</button>
             </div>
         </form>
     </div>
-  </div>
-    <div class='col-xs-4' *ngIf="type == 'base'">
-    <p>...</p>
   </div>
 </div>

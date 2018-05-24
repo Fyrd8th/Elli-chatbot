@@ -1,7 +1,7 @@
 {
     "conversation" :{
       "version" : "v1",
-      "versionDate":"2017-02-03",
+      "versionDate":"2018-05-23",
       "username":"b4134ccd-7cdd-407f-9ffc-817787285921",
       "password":"4SEcq7ItkEYu",
       "workspace1":"b3526d6a-6755-443b-8040-75e344d683e6",
@@ -20,5 +20,5 @@
     },
     "debug":true,
     "port": 3001,
-    "version": "v0.0.7"
+    "version": "v0.0.1"
 }

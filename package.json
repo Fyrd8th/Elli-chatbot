@@ -10,7 +10,7 @@
     "node": "6.x",
     "npm": "5.x"
   },
-  "author": "Jerome Boyer, Sade Sirén", 
+  "author": "Jerome Boyer, Sade Sirén",
   "scripts": {
     "ng": "ng",
     "start": "node server/server",

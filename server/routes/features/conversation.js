@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 const watson = require('watson-developer-cloud');
-const bpmoc  = require('./supplier-bpm-client');
 const persist= require('./persist');
 
 module.exports = {
@@ -23,55 +22,15 @@ module.exports = {
   code could dispatch to BPM.
   It persists the conversation to remote cloudant DB
   */
-   itSupportConversation : function(config,req,res) {
+   ElliConversation : function(config,req,res) {
         // this logic applies when the response is expected to be a value to be added to a context variable
         // the context variable name was set by the conversation dialog
         if (req.body.context.action === "getVar") {
             req.body.context[req.body.context.varname] = req.body.text;
         }
-        sendMessage(config,req,config.conversation.workspace1,res,processITSupportResponse);
+        sendMessage(config,req,config.conversation.workspace1,res,processElliResponse);
   }, // itSupportConversation
-
-   sobdConversation : function(config,req,res) {
-    sendMessage(config,req,config.conversation.workspace2,res,function(config,res,response) {
-        if (config.debug) {console.log(" SOBD <<< "+JSON.stringify(response,null,2));}
-        if (response.Error !== undefined) {
-          res.status(500).send({'text':response.Error});
-        } else {
-          res.status(200).send(response);
-        }
-    });
-  },
-  advisor : function(config,req,res) {
-   if ( req.body.context !== undefined) {
-     req.body.context.action="";
-     req.body.context.predefinedResponses="";
-   }
-   sendMessage(config,req,config.conversation.workspace3,res,function(config,res,response) {
-       if (config.debug) {console.log(" Advisor <<< "+JSON.stringify(response,null,2));}
-       if (response.Error !== undefined) {
-         res.status(500).send({'text':response.Error});
-       } else {
-			response.text="<p>"+response.output.text[0]+"</p>";
-			/*
-			if (response.context.action !== undefined && response.context.action == "predefinedResponses") {
-				for (var sr in response.context.predefinedResponses) {
-				response.text=response.text+
-				"<br/><a class=\"btn btn-primary\" (click)=\"advisorResponse(\""
-				+response.context.predefinedResponses[sr]
-				+"\")>"
-				+response.context.predefinedResponses[sr]+"</a>"
-				console.log(response.text)
-				}
-			}
-			*/
-			if (response.context.action === "click") {
-               response.text= response.text+ "<br/><a class=\"btn btn-primary\" href=\""+response.context.url+"\">"+response.context.buttonText+"</a>"
-           }
-         res.status(200).send(response);
-       }
-   });
- }
+  
 } // exports
 
 // ------------------------------------------------------------
@@ -121,7 +80,7 @@ var sendMessage = function(config,req,wkid,res,next){
 
 } // sendMessage
 
-var processITSupportResponse = function(config,res,response){
+var processElliResponse = function(config,res,response){
     if (config.debug) {console.log(" BASE <<< "+JSON.stringify(response,null,2));}
     if (response.Error !== undefined) {
         res.status(500).send(response);
@@ -129,16 +88,15 @@ var processITSupportResponse = function(config,res,response){
         // Here apply orchestration logic
         if (response.context.url != undefined) {
             if (response.context.action === "click") {
-				//console.log("URL was found: " + response.context.url);
                 response.text= response.output.text[0] + "<a class=\"btn btn-primary\" href=\""+response.context.url+"\">Here</a>"
 				//console.log(response.text);
             }
         } else if (response.context.action === "trigger"
-             && response.context.actionName === "supplierOnBoardingProcess") {
-               bpmoc.callBPMSupplierProcess(config,response.context.customerName,response.context.productName);
+             && response.context.actionName === "x") {
+				 
         } else if (response.context.action == "predefinedResponses") {
 
         }
         res.status(200).send(response);
     }
-} // processITSupportResponse
+} // processElliResponse

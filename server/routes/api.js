@@ -15,7 +15,6 @@
  */
 const express = require('express');
 const conversation = require('./features/conversation');
-//var slacklisterner = require('./features/slack-listener');
 
 /** Export the APIs for the front end */
 module.exports = function(app,config) {
@@ -31,11 +30,7 @@ module.exports = function(app,config) {
       if(!req.body){
         res.status(400).send({error:'no post body'});
       } else {
-        if (req.body.context.type !== undefined && req.body.context.type == "sodb") {
-          conversation.sobdConversation(config,req,res);
-        } else {
-          conversation.itSupportConversation(config,req,res);
-        }
+        conversation.ElliConversation(config,req,res);
       }
   });
 
