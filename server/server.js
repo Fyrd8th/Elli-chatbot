@@ -16,8 +16,8 @@
 // Get dependencies
 const express = require('express');
 const path = require('path');
-
 const bodyParser = require('body-parser');
+const translate = require('google-translate-api');
 
 const app = express();
 
@@ -32,10 +32,28 @@ app.use(express.static(path.join(__dirname, '../dist')));
 var config = require('./config/config.json');
 require('./routes/api')(app,config);
 
+// GET translation through Google Translate API
+app.get('/api/translate/:msg', function(req,res) {
+	let translatable = req.params['msg'];
+	let translated = "";
+	
+	translate(translatable, {to: 'en'}).then(response => {
+		translated = response.text;
+		res.send(response.text);
+		// logs
+		console.log(translatable + " translated into : " + translated);
+		console.log(res.from.language.iso);
+		//=> output detected language
+	}).catch(err => {
+		console.error(err);
+	}); // end catch
+});
+
 // Catch all other routes and return the index file
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../dist/index.html'));
 });
+
 
 
 // start server on the specified port and binding host

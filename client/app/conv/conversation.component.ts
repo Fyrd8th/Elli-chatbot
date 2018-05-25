@@ -69,8 +69,18 @@ export class ConversationComponent implements OnInit, AfterViewChecked {
     obj.direction="to-watson";
     obj.text=this.queryString;
     this.currentDialog.push(obj);
-	this.translationString = this.convService.translateMessage(queryString);
-    this.callConversationBFF(this.translationString);
+	
+	// where translation is called
+	this.convService.translateMessage(this.queryString).subscribe(
+		data => {
+			console.log(data);
+			this.translationString = data._body;
+				console.log(this.translationString);
+			this.callConversationBFF(this.translationString);
+		}
+	);
+	
+    //this.callConversationBFF(this.translationString);
     this.queryString="";
 	this.translationString="";
   }

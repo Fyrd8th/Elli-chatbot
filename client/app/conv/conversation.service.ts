@@ -3,13 +3,12 @@ import { Headers, Http,Response,RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 import {Observable} from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
-import translate = require('google-translate-api');
-
 
 @Injectable()
 export class ConversationService {
   private convUrl ='/api/conversation/';
   private convIoTUrl ='/api/ac/conversation/';
+  private translateUrl ='/api/translate/';
 
   constructor(private http: Http) {
   };
@@ -24,13 +23,7 @@ export class ConversationService {
   
   
   // STILL WORK IN PROGESS!!
-  translateMessage(msg:string) {
-	translate(msg, {from: 'fi', to: 'en'}).then(res => {
-		console.log(res.text);
-		return res.text;
-	}).catch(err => {
-		console.error(err);
-		return "Hello, I can't be translated";
-	});
+  translateMessage(msg:string): Observable<any> {
+	  return this.http.get(this.translateUrl + msg);
   } // end translateMessage
 }
