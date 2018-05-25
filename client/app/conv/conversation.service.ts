@@ -21,8 +21,6 @@ export class ConversationService {
            .map((res:Response) => res.json())
   } // end submitMessage
   
-  
-  // STILL WORK IN PROGESS!!
   translateMessage(msg:string): Observable<any> {
 	  return this.http.get(this.translateUrl + msg);
   } // end translateMessage

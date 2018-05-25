@@ -35,14 +35,12 @@ require('./routes/api')(app,config);
 // GET translation through Google Translate API
 app.get('/api/translate/:msg', function(req,res) {
 	let translatable = req.params['msg'];
-	let translated = "";
 	
 	translate(translatable, {to: 'en'}).then(response => {
-		translated = response.text;
 		res.send(response.text);
 		// logs
-		console.log(translatable + " translated into : " + translated);
-		console.log(res.from.language.iso);
+		console.log(translatable + " translated into : " + response.text);
+		console.log(response.from.language.iso);
 		//=> output detected language
 	}).catch(err => {
 		console.error(err);

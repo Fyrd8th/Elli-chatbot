@@ -73,7 +73,6 @@ export class ConversationComponent implements OnInit, AfterViewChecked {
 	// where translation is called
 	this.convService.translateMessage(this.queryString).subscribe(
 		data => {
-			console.log(data);
 			this.translationString = data._body;
 				console.log(this.translationString);
 			this.callConversationBFF(this.translationString);
