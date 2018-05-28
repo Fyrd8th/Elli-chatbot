@@ -36,7 +36,7 @@ require('./routes/api')(app,config);
 app.get('/api/translate/:msg', function(req,res) {
 	let translatable = req.params['msg'];
 	
-	translate(translatable, {to: 'en'}).then(response => {
+	translate(translatable, {from: 'fi', to: 'en'}).then(response => {
 		res.send(response.text);
 		// logs
 		console.log(translatable + " translated into : " + response.text);
